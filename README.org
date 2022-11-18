@@ -1,10 +1,10 @@
 * Fall 2022 - Lab 11
 
-* Last name:
+* Last name: Zheng
 
-* First name:
+* First name: Bryant
 
-* GitHub username:
+* GitHub username: Compotation
 
 * Notes:
 
