@@ -12,6 +12,11 @@ int Network::findID(std::string usrn) {
 
 Network::Network() {
   numUsers = 0;
+  for (auto & m : following) {
+    for (bool & n : m) {
+      n = false;
+    }
+  }
 }
 
 bool Network::addUser(std::string usrn, std::string dspn) {

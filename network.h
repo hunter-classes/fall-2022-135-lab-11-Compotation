@@ -6,6 +6,7 @@ private:
   static const int MAX_USERS = 20; // max number of user profiles
   int numUsers;                    // number of registered users
   Profile profiles[MAX_USERS];     // user profiles array:
+  bool following[MAX_USERS][MAX_USERS];
   // mapping integer ID -> Profile
 
   // Returns user ID (index in the 'profiles' array) by their username
