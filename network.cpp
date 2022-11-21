@@ -1,5 +1,6 @@
 #include "network.h"
 #include <regex>
+#include <iostream>
 
 int Network::findID(std::string usrn) {
   for (int i = 0; i < numUsers; i++) {
@@ -38,5 +39,17 @@ bool Network::follow(const std::string& usrn1, const std::string& usrn2) {
 }
 
 void Network::printDot() {
-
+  std::cout << "digraph {\n";
+  for (int i = 0; i < numUsers; i++) {
+    std::cout << "  \"@" << profiles[i].getUsername() << "\"\n";
+  }
+  std::cout << "\n";
+  for (int m = 0; m < numUsers; m++) {
+    for (int n = 0; n < numUsers; n++) {
+      if (following[m][n]) {
+        std::cout << "  \"@" << profiles[m].getUsername() << "\" -> " << "\"@" << profiles[n].getUsername() << "\"\n";
+      }
+    }
+  }
+  std::cout << "}";
 }
