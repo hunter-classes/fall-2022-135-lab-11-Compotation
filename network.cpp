@@ -2,7 +2,7 @@
 #include <regex>
 #include <iostream>
 
-int Network::findID(std::string usrn) {
+int Network::findID(const std::string &usrn) {
   for (int i = 0; i < numUsers; i++) {
     if (profiles[i].getUsername() == usrn) {
       return i;
@@ -20,7 +20,7 @@ Network::Network() {
   }
 }
 
-bool Network::addUser(std::string usrn, std::string dspn) {
+bool Network::addUser(const std::string &usrn, const std::string &dspn) {
   if (std::regex_match(usrn, std::regex("^[A-Za-z0-9]+$")) && findID(usrn) == -1 && numUsers < MAX_USERS) {
     profiles[numUsers] = Profile(usrn, dspn);
     numUsers++;
@@ -52,4 +52,11 @@ void Network::printDot() {
     }
   }
   std::cout << "}";
+}
+
+bool Network::isFollowing(const std::string &usrn1, const std::string &usrn2) {
+  if (findID(usrn1) != -1 && findID(usrn2) != -1) {
+    return following[findID(usrn1)][findID(usrn2)];
+  }
+  return false;
 }
