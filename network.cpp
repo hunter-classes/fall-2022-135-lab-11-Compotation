@@ -27,3 +27,16 @@ bool Network::addUser(std::string usrn, std::string dspn) {
   }
   return false;
 }
+
+bool Network::follow(const std::string& usrn1, const std::string& usrn2) {
+  int id1 = findID(usrn1);
+  int id2 = findID(usrn2);
+  if (id1 != -1 && id2 != -1) {
+    following[id1][id2] = true;
+  }
+  return false;
+}
+
+void Network::printDot() {
+
+}
