@@ -1,5 +1,6 @@
 #pragma once
 #include "profile.h"
+#include "post.h"
 
 class Network {
 private:
@@ -7,6 +8,11 @@ private:
   int numUsers;                    // number of registered users
   Profile profiles[MAX_USERS];     // user profiles array:
   bool following[MAX_USERS][MAX_USERS];
+
+  static const int MAX_POSTS = 100;
+  int numPosts;                    // number of posts
+  Post posts[MAX_POSTS];           // array of all posts
+
   // mapping integer ID -> Profile
 
   // Returns user ID (index in the 'profiles' array) by their username
@@ -25,5 +31,14 @@ public:
 
   void printDot();
 
+  // usrn1 is following usrn2
   bool isFollowing(const std::string &usrn1, const std::string &usrn2);
+
+  // Add a new post
+  bool writePost(const std::string &usrn, const std::string &msg);
+
+  // Print user's "timeline"
+  bool printTimeline(const std::string &usrn);
+
+  std::string getTimeline(const std::string &usrn);
 };

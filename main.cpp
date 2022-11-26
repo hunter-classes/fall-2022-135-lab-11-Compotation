@@ -4,6 +4,8 @@
 
 void testTask3();
 
+void testTask4();
+
 int main() {
   Profile p1("marco", "Marco");
   std::cout << p1.getUsername() << std::endl; // marco
@@ -32,6 +34,7 @@ int main() {
   std::cout << nw.addUser("yoshi", "Yoshi") << std::endl;     // false (0)
 
   testTask3();
+  testTask4();
   return 0;
 }
 
@@ -64,4 +67,38 @@ void testTask3() {
   nw.follow("mario2", "luigi");
 
   nw.printDot();
+}
+
+void testTask4() {
+  Network nw;
+  // add three users
+  nw.addUser("mario", "Mario");
+  nw.addUser("luigi", "Luigi");
+  nw.addUser("yoshi", "Yoshi");
+
+  nw.follow("mario", "luigi");
+  nw.follow("luigi", "mario");
+  nw.follow("luigi", "yoshi");
+  nw.follow("yoshi", "mario");
+
+  // write some posts
+  nw.writePost("mario", "It's a-me, Mario!");
+  nw.writePost("luigi", "Hey hey!");
+  nw.writePost("mario", "Hi Luigi!");
+  nw.writePost("yoshi", "Test 1");
+  nw.writePost("yoshi", "Test 2");
+  nw.writePost("luigi", "I just hope this crazy plan of yours works!");
+  nw.writePost("mario", "My crazy plans always work!");
+  nw.writePost("yoshi", "Test 3");
+  nw.writePost("yoshi", "Test 4");
+  nw.writePost("yoshi", "Test 5");
+
+  std::cout << std::endl;
+  std::cout << "======= Mario's timeline =======" << std::endl;
+  nw.printTimeline("mario");
+  std::cout << std::endl;
+
+  std::cout << "======= Yoshi's timeline =======" << std::endl;
+  nw.printTimeline("yoshi");
+  std::cout << std::endl;
 }

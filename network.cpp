@@ -13,6 +13,7 @@ int Network::findID(const std::string &usrn) {
 
 Network::Network() {
   numUsers = 0;
+  numPosts = 0;
   for (auto & m : following) {
     for (bool & n : m) {
       n = false;
@@ -59,4 +60,29 @@ bool Network::isFollowing(const std::string &usrn1, const std::string &usrn2) {
     return following[findID(usrn1)][findID(usrn2)];
   }
   return false;
+}
+
+bool Network::writePost(const std::string &usrn, const std::string &msg) {
+  if (findID(usrn) != -1 && numPosts < MAX_POSTS) {
+    posts[numPosts] = {usrn, msg};
+    numPosts++;
+    return true;
+  }
+  return false;
+}
+
+bool Network::printTimeline(const std::string &usrn) {
+  std::cout << getTimeline(usrn);
+  return !getTimeline(usrn).empty();
+}
+
+std::string Network::getTimeline(const std::string &usrn) {
+  std::string res;
+  for (int i = numPosts - 1; i > -1; i--) {
+    Post &post = posts[i];
+    if (post.username == usrn || isFollowing(usrn, post.username)) {
+      res += profiles[findID(post.username)].getFullName() + ": " + post.message + "\n";
+    }
+  }
+  return res;
 }
